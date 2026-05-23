@@ -1,0 +1,21 @@
+{
+  "name": "underai-document-comparison",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w @underai/api\" \"npm run dev -w @underai/web\"",
+    "dev:api": "npm run dev -w @underai/api",
+    "dev:web": "npm run dev -w @underai/web",
+    "build": "npm run build -w @underai/shared && npm run build -w @underai/api && npm run build -w @underai/web",
+    "db:generate": "npm run db:generate -w @underai/api",
+    "db:migrate": "npm run db:migrate -w @underai/api",
+    "db:seed": "npm run db:seed -w @underai/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.3"
+  }
+}
