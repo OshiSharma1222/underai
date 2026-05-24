@@ -10,12 +10,15 @@ function requireEnv(name: string, fallback?: string): string {
 }
 
 export const config = {
-  port: parseInt(process.env.API_PORT ?? "4000", 10),
   databaseUrl: requireEnv("DATABASE_URL"),
   jwtSecret: requireEnv("JWT_SECRET", "dev-secret-change-in-production"),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? "7d",
   geminiApiKey: process.env.GEMINI_API_KEY ?? "",
-  corsOrigin: process.env.CORS_ORIGIN ?? "http://localhost:3000",
+  corsOrigins: (process.env.CORS_ORIGIN ?? "http://localhost:3000")
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean),
+  port: parseInt(process.env.PORT ?? process.env.API_PORT ?? "4000", 10),
   uploadDir: path.resolve(
     __dirname,
     "../..",

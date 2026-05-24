@@ -8,7 +8,8 @@
     "start": "node dist/index.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "tsx --env-file=.env src/db/seed.ts"
+    "db:seed": "tsx --env-file=.env src/db/seed.ts",
+    "db:baseline": "tsx --env-file=.env scripts/baseline-migration.ts"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
